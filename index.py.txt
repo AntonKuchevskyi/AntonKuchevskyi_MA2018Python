@@ -1,0 +1,56 @@
+def name_to_number(name):
+    if name == "rock":
+        number = 0
+    elif name == "Spock":
+        number = 1
+    elif name == "paper":
+        number = 2
+    elif name == "lizard":
+        number = 3
+    elif name == "scissors":
+        number = 4
+    else:
+        number = "invalid name"
+    return number
+
+
+def number_to_name(number):
+    if number == 0:
+        name = "rock"
+    elif number == 1:
+        name = "Spock"
+    elif number == 2:
+        name = "paper"
+    elif number == 3:
+        name = "lizard"
+    elif number == 4:
+        name = "scissors"
+    else:
+        name = "invalid number"
+    return name
+
+
+def rpsls(name):    
+    print "Player chooses", name
+    player_number = name_to_number(name)
+    comp_number = random.randrange(0, 5)
+    print "Computer chooses", comp_number
+    if ((player_number - comp_number)%5) == 1 or ((player_number - comp_number)%5) == 2:
+        print "Player wins!"
+    elif ((player_number - comp_number)%5) == 3 or ((player_number - comp_number)%5) == 4:
+        print "Computer wins!"
+    elif ((player_number - comp_number)%5) == 0:
+        print "Game tied!"
+        
+# test
+rpsls("rock")
+print ("\n")
+rpsls("Spock")
+print ("\n")
+rpsls("paper")
+print ("\n")
+rpsls("paper")
+print ("\n")
+rpsls("lizard")
+print ("\n")
+rpsls("scissors")
