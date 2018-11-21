@@ -1,0 +1,88 @@
+import simplegui
+import random
+import math
+
+num_range = 100
+secret_number = random.randrange(0, num_range)
+player_guess = 0
+attempts = 7
+
+def new_game():
+    global secret_number, num_range, attempts  
+    secret_number = random.randrange(0, num_range)
+    if num_range == 100:
+        attempts = 7
+    elif num_range == 1000:
+        attempts = 10
+    print ""
+    print "A new game has started with a range from 0 to " + str(num_range) + "."
+    print "You have " + str(attempts) + " attempts remaining."
+    
+def decrement_attempts():
+    global attempts
+    attempts = attempts - 1
+    if attempts > 0:
+        print "You have " + str(attempts) + " attempts remaining."
+    else:
+        print "You lost! The secret number was " + str(secret_number)
+        new_game()
+        
+def range100():
+    global num_range
+    num_range = 100
+    new_game()
+    
+def range1000():
+    global num_range
+    num_range = 1000
+    new_game()
+    
+def input_guess(guess):
+    global secret_number, player_guess
+    player_guess = int(guess)
+    print ""
+    if player_guess == secret_number:
+        print "Guess was " + str(player_guess)
+        print "Correct!"
+        new_game()
+    elif player_guess > secret_number:
+        print "Guess was " + str(player_guess)
+        print "Lower!"
+        decrement_attempts()
+    elif player_guess < secret_number:
+        print "Guess was " + str(player_guess)
+        print "Higher!"
+        decrement_attempts()
+
+input_guess(50)
+input_guess(25)
+input_guess(40)
+input_guess(30)
+input_guess(32)
+input_guess(34)
+input_guess(33)
+
+input_guess(575)
+input_guess(350)
+input_guess(100)
+input_guess(50)
+input_guess(75)
+input_guess(60)
+input_guess(45)
+
+input_guess(45)
+input_guess(30)
+input_guess(25)
+input_guess(15)
+input_guess(20)
+input_guess(18)
+input_guess(17)
+
+        
+frame = simplegui.create_frame("Guess the number", 200, 200)
+frame.add_button("Range 0, 100", range100, 200)
+frame.add_button("Range 0, 1000", range1000, 200)
+frame.add_input("Your guess", input_guess, 50)
+
+new_game()
+frame.start()
